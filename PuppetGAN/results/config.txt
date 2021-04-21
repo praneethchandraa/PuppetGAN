@@ -1,6 +1,6 @@
-RoidsAttrCyDigits
+PuppetGAN
 
-2020-09-24 16:14:01.884398
+2021-04-20 19:43:19.488166
 -----------------------------------------------------------------
 
 HYPERPARAMS
@@ -8,9 +8,10 @@ Real Generator LR: 0.0002
 Real Discriminator LR: 5e-05
 Synthetic Generator LR: 0.0002
 Synthetic Discriminator LR: 5e-05
-Image Size: (32, 32)
+Image Size: (128, 128)
 Noise std: 0.2
 Bottleneck Noise: 0
+Batch Size: 30
 On Roids: True
 Reconstruction Loss Weight: 10
 Disentanglement Loss Weight: 10
@@ -24,9 +25,9 @@ Model: "Downsampling_1"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-conv2d (Conv2D)              (None, 16, 16, 64)        3072      
+conv2d (Conv2D)              (None, 64, 64, 64)        3072      
 _________________________________________________________________
-leaky_re_lu (LeakyReLU)      (None, 16, 16, 64)        0         
+leaky_re_lu (LeakyReLU)      (None, 64, 64, 64)        0         
 =================================================================
 Total params: 3,072
 Trainable params: 3,072
@@ -38,11 +39,11 @@ Model: "Downsampling_2"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-conv2d_1 (Conv2D)            (None, 8, 8, 128)         131072    
+conv2d_1 (Conv2D)            (None, 32, 32, 128)       131072    
 _________________________________________________________________
-batch_normalization (BatchNo (None, 8, 8, 128)         512       
+batch_normalization (BatchNo (None, 32, 32, 128)       512       
 _________________________________________________________________
-leaky_re_lu_1 (LeakyReLU)    (None, 8, 8, 128)         0         
+leaky_re_lu_1 (LeakyReLU)    (None, 32, 32, 128)       0         
 =================================================================
 Total params: 131,584
 Trainable params: 131,328
@@ -54,11 +55,11 @@ Model: "Downsampling_3"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-conv2d_2 (Conv2D)            (None, 4, 4, 256)         524288    
+conv2d_2 (Conv2D)            (None, 16, 16, 256)       524288    
 _________________________________________________________________
-batch_normalization_1 (Batch (None, 4, 4, 256)         1024      
+batch_normalization_1 (Batch (None, 16, 16, 256)       1024      
 _________________________________________________________________
-leaky_re_lu_2 (LeakyReLU)    (None, 4, 4, 256)         0         
+leaky_re_lu_2 (LeakyReLU)    (None, 16, 16, 256)       0         
 =================================================================
 Total params: 525,312
 Trainable params: 524,800
@@ -70,11 +71,11 @@ Model: "Downsampling_4"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-conv2d_3 (Conv2D)            (None, 2, 2, 512)         2097152   
+conv2d_3 (Conv2D)            (None, 8, 8, 512)         2097152   
 _________________________________________________________________
-batch_normalization_2 (Batch (None, 2, 2, 512)         2048      
+batch_normalization_2 (Batch (None, 8, 8, 512)         2048      
 _________________________________________________________________
-leaky_re_lu_3 (LeakyReLU)    (None, 2, 2, 512)         0         
+leaky_re_lu_3 (LeakyReLU)    (None, 8, 8, 512)         0         
 =================================================================
 Total params: 2,099,200
 Trainable params: 2,098,176
@@ -86,11 +87,11 @@ Model: "Downsampling_5"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-conv2d_4 (Conv2D)            (None, 1, 1, 512)         4194304   
+conv2d_4 (Conv2D)            (None, 4, 4, 512)         4194304   
 _________________________________________________________________
-batch_normalization_3 (Batch (None, 1, 1, 512)         2048      
+batch_normalization_3 (Batch (None, 4, 4, 512)         2048      
 _________________________________________________________________
-leaky_re_lu_4 (LeakyReLU)    (None, 1, 1, 512)         0         
+leaky_re_lu_4 (LeakyReLU)    (None, 4, 4, 512)         0         
 =================================================================
 Total params: 4,196,352
 Trainable params: 4,195,328
@@ -102,14 +103,14 @@ Model: "Bottleneck"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-flatten (Flatten)            (None, 512)               0         
+flatten (Flatten)            (None, 8192)              0         
 _________________________________________________________________
-dense (Dense)                (None, 128)               65664     
+dense (Dense)                (None, 128)               1048704   
 _________________________________________________________________
 gaussian_noise (GaussianNois (None, 128)               0         
 =================================================================
-Total params: 65,664
-Trainable params: 65,664
+Total params: 1,048,704
+Trainable params: 1,048,704
 Non-trainable params: 0
 _________________________________________________________________
 
@@ -118,11 +119,11 @@ Model: "Real_Upsampling_1"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-conv2d_transpose (Conv2DTran (None, 2, 2, 512)         4194304   
+conv2d_transpose (Conv2DTran (None, 8, 8, 512)         4194304   
 _________________________________________________________________
-batch_normalization_4 (Batch (None, 2, 2, 512)         2048      
+batch_normalization_4 (Batch (None, 8, 8, 512)         2048      
 _________________________________________________________________
-re_lu (ReLU)                 (None, 2, 2, 512)         0         
+re_lu (ReLU)                 (None, 8, 8, 512)         0         
 =================================================================
 Total params: 4,196,352
 Trainable params: 4,195,328
@@ -134,11 +135,11 @@ Model: "Real_Upsampling_2"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-conv2d_transpose_1 (Conv2DTr (None, 4, 4, 256)         2097152   
+conv2d_transpose_1 (Conv2DTr (None, 16, 16, 256)       2097152   
 _________________________________________________________________
-batch_normalization_5 (Batch (None, 4, 4, 256)         1024      
+batch_normalization_5 (Batch (None, 16, 16, 256)       1024      
 _________________________________________________________________
-re_lu_1 (ReLU)               (None, 4, 4, 256)         0         
+re_lu_1 (ReLU)               (None, 16, 16, 256)       0         
 =================================================================
 Total params: 2,098,176
 Trainable params: 2,097,664
@@ -150,11 +151,11 @@ Model: "Real_Upsampling_3"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-conv2d_transpose_2 (Conv2DTr (None, 8, 8, 128)         524288    
+conv2d_transpose_2 (Conv2DTr (None, 32, 32, 128)       524288    
 _________________________________________________________________
-batch_normalization_6 (Batch (None, 8, 8, 128)         512       
+batch_normalization_6 (Batch (None, 32, 32, 128)       512       
 _________________________________________________________________
-re_lu_2 (ReLU)               (None, 8, 8, 128)         0         
+re_lu_2 (ReLU)               (None, 32, 32, 128)       0         
 =================================================================
 Total params: 524,800
 Trainable params: 524,544
@@ -166,11 +167,11 @@ Model: "Real_Upsampling_4"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-conv2d_transpose_3 (Conv2DTr (None, 16, 16, 64)        131072    
+conv2d_transpose_3 (Conv2DTr (None, 64, 64, 64)        131072    
 _________________________________________________________________
-batch_normalization_7 (Batch (None, 16, 16, 64)        256       
+batch_normalization_7 (Batch (None, 64, 64, 64)        256       
 _________________________________________________________________
-re_lu_3 (ReLU)               (None, 16, 16, 64)        0         
+re_lu_3 (ReLU)               (None, 64, 64, 64)        0         
 =================================================================
 Total params: 131,328
 Trainable params: 131,200
@@ -182,11 +183,11 @@ Model: "Synthetic_Upsampling_1"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-conv2d_transpose_4 (Conv2DTr (None, 2, 2, 512)         4194304   
+conv2d_transpose_4 (Conv2DTr (None, 8, 8, 512)         4194304   
 _________________________________________________________________
-batch_normalization_8 (Batch (None, 2, 2, 512)         2048      
+batch_normalization_8 (Batch (None, 8, 8, 512)         2048      
 _________________________________________________________________
-re_lu_4 (ReLU)               (None, 2, 2, 512)         0         
+re_lu_4 (ReLU)               (None, 8, 8, 512)         0         
 =================================================================
 Total params: 4,196,352
 Trainable params: 4,195,328
@@ -198,11 +199,11 @@ Model: "Synthetic_Upsampling_2"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-conv2d_transpose_5 (Conv2DTr (None, 4, 4, 256)         2097152   
+conv2d_transpose_5 (Conv2DTr (None, 16, 16, 256)       2097152   
 _________________________________________________________________
-batch_normalization_9 (Batch (None, 4, 4, 256)         1024      
+batch_normalization_9 (Batch (None, 16, 16, 256)       1024      
 _________________________________________________________________
-re_lu_5 (ReLU)               (None, 4, 4, 256)         0         
+re_lu_5 (ReLU)               (None, 16, 16, 256)       0         
 =================================================================
 Total params: 2,098,176
 Trainable params: 2,097,664
@@ -214,11 +215,11 @@ Model: "Synthetic_Upsampling_3"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-conv2d_transpose_6 (Conv2DTr (None, 8, 8, 128)         524288    
+conv2d_transpose_6 (Conv2DTr (None, 32, 32, 128)       524288    
 _________________________________________________________________
-batch_normalization_10 (Batc (None, 8, 8, 128)         512       
+batch_normalization_10 (Batc (None, 32, 32, 128)       512       
 _________________________________________________________________
-re_lu_6 (ReLU)               (None, 8, 8, 128)         0         
+re_lu_6 (ReLU)               (None, 32, 32, 128)       0         
 =================================================================
 Total params: 524,800
 Trainable params: 524,544
@@ -230,11 +231,11 @@ Model: "Synthetic_Upsampling_4"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-conv2d_transpose_7 (Conv2DTr (None, 16, 16, 64)        131072    
+conv2d_transpose_7 (Conv2DTr (None, 64, 64, 64)        131072    
 _________________________________________________________________
-batch_normalization_11 (Batc (None, 16, 16, 64)        256       
+batch_normalization_11 (Batc (None, 64, 64, 64)        256       
 _________________________________________________________________
-re_lu_7 (ReLU)               (None, 16, 16, 64)        0         
+re_lu_7 (ReLU)               (None, 64, 64, 64)        0         
 =================================================================
 Total params: 131,328
 Trainable params: 131,200
@@ -246,28 +247,28 @@ Model: "Real_Generator"
 __________________________________________________________________________________________________
 Layer (type)                    Output Shape         Param #     Connected to                     
 ==================================================================================================
-input_1 (InputLayer)            [(None, 64, 32, 3)]  0                                            
+input_1 (InputLayer)            [(None, 256, 128, 3) 0                                            
 __________________________________________________________________________________________________
-tf_op_layer_strided_slice_1 (Te [(None, 32, 32, 3)]  0           input_1[0][0]                    
+tf_op_layer_strided_slice_1 (Te [(None, 128, 128, 3) 0           input_1[0][0]                    
 __________________________________________________________________________________________________
-tf_op_layer_strided_slice (Tens [(None, 32, 32, 3)]  0           input_1[0][0]                    
+tf_op_layer_strided_slice (Tens [(None, 128, 128, 3) 0           input_1[0][0]                    
 __________________________________________________________________________________________________
-Downsampling_1 (Sequential)     (None, 16, 16, 64)   3072        tf_op_layer_strided_slice[0][0]  
+Downsampling_1 (Sequential)     (None, 64, 64, 64)   3072        tf_op_layer_strided_slice[0][0]  
                                                                  tf_op_layer_strided_slice_1[0][0]
 __________________________________________________________________________________________________
-Downsampling_2 (Sequential)     (None, 8, 8, 128)    131584      Downsampling_1[0][0]             
+Downsampling_2 (Sequential)     (None, 32, 32, 128)  131584      Downsampling_1[0][0]             
                                                                  Downsampling_1[1][0]             
 __________________________________________________________________________________________________
-Downsampling_3 (Sequential)     (None, 4, 4, 256)    525312      Downsampling_2[0][0]             
+Downsampling_3 (Sequential)     (None, 16, 16, 256)  525312      Downsampling_2[0][0]             
                                                                  Downsampling_2[1][0]             
 __________________________________________________________________________________________________
-Downsampling_4 (Sequential)     (None, 2, 2, 512)    2099200     Downsampling_3[0][0]             
+Downsampling_4 (Sequential)     (None, 8, 8, 512)    2099200     Downsampling_3[0][0]             
                                                                  Downsampling_3[1][0]             
 __________________________________________________________________________________________________
-Downsampling_5 (Sequential)     (None, 1, 1, 512)    4196352     Downsampling_4[0][0]             
+Downsampling_5 (Sequential)     (None, 4, 4, 512)    4196352     Downsampling_4[0][0]             
                                                                  Downsampling_4[1][0]             
 __________________________________________________________________________________________________
-Bottleneck (Sequential)         (None, 128)          65664       Downsampling_5[0][0]             
+Bottleneck (Sequential)         (None, 128)          1048704     Downsampling_5[0][0]             
                                                                  Downsampling_5[1][0]             
 __________________________________________________________________________________________________
 tf_op_layer_split_1 (TensorFlow [(None, 64), (None,  0           Bottleneck[1][0]                 
@@ -277,22 +278,22 @@ ________________________________________________________________________________
 concatenate (Concatenate)       (None, 128)          0           tf_op_layer_split_1[0][0]        
                                                                  tf_op_layer_split[0][1]          
 __________________________________________________________________________________________________
-dense_1 (Dense)                 (None, 512)          66048       concatenate[0][0]                
+dense_1 (Dense)                 (None, 8192)         1056768     concatenate[0][0]                
 __________________________________________________________________________________________________
-reshape (Reshape)               (None, 1, 1, 512)    0           dense_1[0][0]                    
+reshape (Reshape)               (None, 4, 4, 512)    0           dense_1[0][0]                    
 __________________________________________________________________________________________________
-Real_Upsampling_1 (Sequential)  (None, 2, 2, 512)    4196352     reshape[0][0]                    
+Real_Upsampling_1 (Sequential)  (None, 8, 8, 512)    4196352     reshape[0][0]                    
 __________________________________________________________________________________________________
-Real_Upsampling_2 (Sequential)  (None, 4, 4, 256)    2098176     Real_Upsampling_1[0][0]          
+Real_Upsampling_2 (Sequential)  (None, 16, 16, 256)  2098176     Real_Upsampling_1[0][0]          
 __________________________________________________________________________________________________
-Real_Upsampling_3 (Sequential)  (None, 8, 8, 128)    524800      Real_Upsampling_2[0][0]          
+Real_Upsampling_3 (Sequential)  (None, 32, 32, 128)  524800      Real_Upsampling_2[0][0]          
 __________________________________________________________________________________________________
-Real_Upsampling_4 (Sequential)  (None, 16, 16, 64)   131328      Real_Upsampling_3[0][0]          
+Real_Upsampling_4 (Sequential)  (None, 64, 64, 64)   131328      Real_Upsampling_3[0][0]          
 __________________________________________________________________________________________________
-conv2d_transpose_8 (Conv2DTrans (None, 32, 32, 3)    3075        Real_Upsampling_4[0][0]          
+conv2d_transpose_8 (Conv2DTrans (None, 128, 128, 3)  3075        Real_Upsampling_4[0][0]          
 ==================================================================================================
-Total params: 14,040,963
-Trainable params: 14,036,227
+Total params: 16,014,723
+Trainable params: 16,009,987
 Non-trainable params: 4,736
 __________________________________________________________________________________________________
 
@@ -301,28 +302,28 @@ Model: "Synthetic_Generator"
 __________________________________________________________________________________________________
 Layer (type)                    Output Shape         Param #     Connected to                     
 ==================================================================================================
-input_2 (InputLayer)            [(None, 64, 32, 3)]  0                                            
+input_2 (InputLayer)            [(None, 256, 128, 3) 0                                            
 __________________________________________________________________________________________________
-tf_op_layer_strided_slice_3 (Te [(None, 32, 32, 3)]  0           input_2[0][0]                    
+tf_op_layer_strided_slice_3 (Te [(None, 128, 128, 3) 0           input_2[0][0]                    
 __________________________________________________________________________________________________
-tf_op_layer_strided_slice_2 (Te [(None, 32, 32, 3)]  0           input_2[0][0]                    
+tf_op_layer_strided_slice_2 (Te [(None, 128, 128, 3) 0           input_2[0][0]                    
 __________________________________________________________________________________________________
-Downsampling_1 (Sequential)     (None, 16, 16, 64)   3072        tf_op_layer_strided_slice_2[0][0]
+Downsampling_1 (Sequential)     (None, 64, 64, 64)   3072        tf_op_layer_strided_slice_2[0][0]
                                                                  tf_op_layer_strided_slice_3[0][0]
 __________________________________________________________________________________________________
-Downsampling_2 (Sequential)     (None, 8, 8, 128)    131584      Downsampling_1[2][0]             
+Downsampling_2 (Sequential)     (None, 32, 32, 128)  131584      Downsampling_1[2][0]             
                                                                  Downsampling_1[3][0]             
 __________________________________________________________________________________________________
-Downsampling_3 (Sequential)     (None, 4, 4, 256)    525312      Downsampling_2[2][0]             
+Downsampling_3 (Sequential)     (None, 16, 16, 256)  525312      Downsampling_2[2][0]             
                                                                  Downsampling_2[3][0]             
 __________________________________________________________________________________________________
-Downsampling_4 (Sequential)     (None, 2, 2, 512)    2099200     Downsampling_3[2][0]             
+Downsampling_4 (Sequential)     (None, 8, 8, 512)    2099200     Downsampling_3[2][0]             
                                                                  Downsampling_3[3][0]             
 __________________________________________________________________________________________________
-Downsampling_5 (Sequential)     (None, 1, 1, 512)    4196352     Downsampling_4[2][0]             
+Downsampling_5 (Sequential)     (None, 4, 4, 512)    4196352     Downsampling_4[2][0]             
                                                                  Downsampling_4[3][0]             
 __________________________________________________________________________________________________
-Bottleneck (Sequential)         (None, 128)          65664       Downsampling_5[2][0]             
+Bottleneck (Sequential)         (None, 128)          1048704     Downsampling_5[2][0]             
                                                                  Downsampling_5[3][0]             
 __________________________________________________________________________________________________
 tf_op_layer_split_3 (TensorFlow [(None, 64), (None,  0           Bottleneck[3][0]                 
@@ -332,22 +333,22 @@ ________________________________________________________________________________
 concatenate_1 (Concatenate)     (None, 128)          0           tf_op_layer_split_3[0][0]        
                                                                  tf_op_layer_split_2[0][1]        
 __________________________________________________________________________________________________
-dense_2 (Dense)                 (None, 512)          66048       concatenate_1[0][0]              
+dense_2 (Dense)                 (None, 8192)         1056768     concatenate_1[0][0]              
 __________________________________________________________________________________________________
-reshape_1 (Reshape)             (None, 1, 1, 512)    0           dense_2[0][0]                    
+reshape_1 (Reshape)             (None, 4, 4, 512)    0           dense_2[0][0]                    
 __________________________________________________________________________________________________
-Synthetic_Upsampling_1 (Sequent (None, 2, 2, 512)    4196352     reshape_1[0][0]                  
+Synthetic_Upsampling_1 (Sequent (None, 8, 8, 512)    4196352     reshape_1[0][0]                  
 __________________________________________________________________________________________________
-Synthetic_Upsampling_2 (Sequent (None, 4, 4, 256)    2098176     Synthetic_Upsampling_1[0][0]     
+Synthetic_Upsampling_2 (Sequent (None, 16, 16, 256)  2098176     Synthetic_Upsampling_1[0][0]     
 __________________________________________________________________________________________________
-Synthetic_Upsampling_3 (Sequent (None, 8, 8, 128)    524800      Synthetic_Upsampling_2[0][0]     
+Synthetic_Upsampling_3 (Sequent (None, 32, 32, 128)  524800      Synthetic_Upsampling_2[0][0]     
 __________________________________________________________________________________________________
-Synthetic_Upsampling_4 (Sequent (None, 16, 16, 64)   131328      Synthetic_Upsampling_3[0][0]     
+Synthetic_Upsampling_4 (Sequent (None, 64, 64, 64)   131328      Synthetic_Upsampling_3[0][0]     
 __________________________________________________________________________________________________
-conv2d_transpose_9 (Conv2DTrans (None, 32, 32, 3)    3075        Synthetic_Upsampling_4[0][0]     
+conv2d_transpose_9 (Conv2DTrans (None, 128, 128, 3)  3075        Synthetic_Upsampling_4[0][0]     
 ==================================================================================================
-Total params: 14,040,963
-Trainable params: 14,036,227
+Total params: 16,014,723
+Trainable params: 16,009,987
 Non-trainable params: 4,736
 __________________________________________________________________________________________________
 
@@ -356,25 +357,25 @@ Model: "Real_Discriminator"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-input_3 (InputLayer)         [(None, 32, 32, 3)]       0         
+input_3 (InputLayer)         [(None, 128, 128, 3)]     0         
 _________________________________________________________________
-sequential (Sequential)      (None, 16, 16, 64)        3072      
+sequential (Sequential)      (None, 64, 64, 64)        3072      
 _________________________________________________________________
-sequential_1 (Sequential)    (None, 8, 8, 128)         131584    
+sequential_1 (Sequential)    (None, 32, 32, 128)       131584    
 _________________________________________________________________
-sequential_2 (Sequential)    (None, 4, 4, 256)         525312    
+sequential_2 (Sequential)    (None, 16, 16, 256)       525312    
 _________________________________________________________________
-zero_padding2d (ZeroPadding2 (None, 6, 6, 256)         0         
+zero_padding2d (ZeroPadding2 (None, 18, 18, 256)       0         
 _________________________________________________________________
-conv2d_8 (Conv2D)            (None, 3, 3, 512)         2097152   
+conv2d_8 (Conv2D)            (None, 15, 15, 512)       2097152   
 _________________________________________________________________
-batch_normalization_14 (Batc (None, 3, 3, 512)         2048      
+batch_normalization_14 (Batc (None, 15, 15, 512)       2048      
 _________________________________________________________________
-leaky_re_lu_8 (LeakyReLU)    (None, 3, 3, 512)         0         
+leaky_re_lu_8 (LeakyReLU)    (None, 15, 15, 512)       0         
 _________________________________________________________________
-zero_padding2d_1 (ZeroPaddin (None, 5, 5, 512)         0         
+zero_padding2d_1 (ZeroPaddin (None, 17, 17, 512)       0         
 _________________________________________________________________
-conv2d_9 (Conv2D)            (None, 2, 2, 1)           8193      
+conv2d_9 (Conv2D)            (None, 14, 14, 1)         8193      
 =================================================================
 Total params: 2,767,361
 Trainable params: 2,765,569
@@ -386,25 +387,25 @@ Model: "Synthetic_Discriminator"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-input_4 (InputLayer)         [(None, 32, 32, 3)]       0         
+input_4 (InputLayer)         [(None, 128, 128, 3)]     0         
 _________________________________________________________________
-sequential_3 (Sequential)    (None, 16, 16, 64)        3072      
+sequential_3 (Sequential)    (None, 64, 64, 64)        3072      
 _________________________________________________________________
-sequential_4 (Sequential)    (None, 8, 8, 128)         131584    
+sequential_4 (Sequential)    (None, 32, 32, 128)       131584    
 _________________________________________________________________
-sequential_5 (Sequential)    (None, 4, 4, 256)         525312    
+sequential_5 (Sequential)    (None, 16, 16, 256)       525312    
 _________________________________________________________________
-zero_padding2d_2 (ZeroPaddin (None, 6, 6, 256)         0         
+zero_padding2d_2 (ZeroPaddin (None, 18, 18, 256)       0         
 _________________________________________________________________
-conv2d_13 (Conv2D)           (None, 3, 3, 512)         2097152   
+conv2d_13 (Conv2D)           (None, 15, 15, 512)       2097152   
 _________________________________________________________________
-batch_normalization_17 (Batc (None, 3, 3, 512)         2048      
+batch_normalization_17 (Batc (None, 15, 15, 512)       2048      
 _________________________________________________________________
-leaky_re_lu_12 (LeakyReLU)   (None, 3, 3, 512)         0         
+leaky_re_lu_12 (LeakyReLU)   (None, 15, 15, 512)       0         
 _________________________________________________________________
-zero_padding2d_3 (ZeroPaddin (None, 5, 5, 512)         0         
+zero_padding2d_3 (ZeroPaddin (None, 17, 17, 512)       0         
 _________________________________________________________________
-conv2d_14 (Conv2D)           (None, 2, 2, 1)           8193      
+conv2d_14 (Conv2D)           (None, 14, 14, 1)         8193      
 =================================================================
 Total params: 2,767,361
 Trainable params: 2,765,569

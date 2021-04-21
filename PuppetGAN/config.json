@@ -1,10 +1,20 @@
 {
 	"comments" : "Keep here any info you may want about the current configuration :)",
 
+<<<<<<< HEAD
 	"dataset" : "mouth",
 	"dataset info" : "choose between 'mnist', 'usps', 'mouth' and 'light'",
 
 	"epochs" : 151,
+=======
+	"dataset" : "syn_weiz",
+	"dataset info" : "choose between 'mnist', 'usps', 'mouth', 'light', 'syn_weiz'",
+
+	"target_path" : "./results/syn_weiz", 
+	"name" : "syn_weiz",
+
+	"epochs" : 1,
+>>>>>>> b50cab03ae5763206cc518d53b192b18cbd9698a
 	"noise std" : 0.2,
 	"bottleneck noise" : 0,
 	
@@ -39,8 +49,17 @@
 	"faces" : {
 		"info" : "dataset-specific hyperparameters",
 
-		"batch size" : 30,
+		"batch size" : 16,
 		"image size" : [128, 128],
+		"save images every" : 10,
+		"save model every" : 10
+	},
+
+	"syn_weiz": {
+		"info": "dataset-specific hyperparameters",
+
+		"batch size" : 4,
+		"image size" : [256, 256],
 		"save images every" : 10,
 		"save model every" : 10
 	}
