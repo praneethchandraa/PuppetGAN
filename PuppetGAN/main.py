@@ -46,7 +46,8 @@ def main(test, ckpt):
         'mnist' : 'digits',
         'usps' : 'digits',
         'mouth' : 'faces',
-        'light' : 'faces'
+        'light' : 'faces',
+        'syn_weiz': 'syn_weiz'
     }
 
 
@@ -82,8 +83,11 @@ def main(test, ckpt):
     ATTR_CYCLE_B3_WEIGHT = hyperparams['losses weights']['attribute cycle b3']
     ATTR_CYCLE_A_WEIGHT = hyperparams['losses weights']['attribute cycle a']
 
-
     # define the required directories
+    TARGET_PATH = hyperparams['target_path']
+    NAME = hyperparams['name']
+
+
     real_path = f'../data/{DATASET}/real_'
     synth_path = f'../data/{DATASET}/synth_'
     eval_path = f'../data/{DATASET}/rows_'
@@ -95,7 +99,9 @@ def main(test, ckpt):
                                   real_gen_lr=REAL_GEN_LR,
                                   real_disc_lr=REAL_DISC_LR,
                                   synth_gen_lr=SYNTH_GEN_LR,
-                                  synth_disc_lr=SYNTH_DISC_LR)
+                                  synth_disc_lr=SYNTH_DISC_LR,
+                                  target_path=TARGET_PATH,
+                                  name=NAME)
     
     if ckpt != -1:
         ckpt = f'ckpt-{ckpt}'
