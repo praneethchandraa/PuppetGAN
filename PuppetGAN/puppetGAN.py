@@ -48,7 +48,9 @@ class PuppetGAN:
                  real_gen_lr=2e-4,
                  real_disc_lr=5e-5,
                  synth_gen_lr=2e-4,
-                 synth_disc_lr=5e-5):
+                 synth_disc_lr=5e-5,
+                 target_path='./results',
+                 name = 'PuppetGAN'):
         # the desired size of the images
         # it doesn't have to be equal to the input size
         # every input will be resized to this value
@@ -97,10 +99,12 @@ class PuppetGAN:
         self.disc_synth, self.disc_synth_opt, self.disc_synth_grads = self.init_discriminator(name='Synthetic_Discriminator',
                                                                                               lr=self.synth_disc_lr)
 
-        self.ckpt, self.ckpt_manager = self.define_checkpoints()
+        self.ckpt, self.ckpt_manager = self.define_checkpoints(path=os.path.join('./checkpoints', name))
+
+        self._target_path = target_path
 
 
-    def log_config(self, target_path='results', file_name='config', **kwargs):
+    def log_config(self, target_path=None, file_name='config', **kwargs):
         '''
             Creates and saves a report 
             of the model's architecture and its parameters.
@@ -110,6 +114,10 @@ class PuppetGAN:
                 file_name   : the name of the report file.
                               the extension is set automatically to .txt
         '''
+
+        if target_path is None :
+            target_path = self._target_path
+
         if not os.path.exists(target_path):
             os.makedirs(target_path)
 
@@ -621,7 +629,8 @@ class PuppetGAN:
             data_real = utils.get_batch_flow(path_real, self.img_size, batch_size)
             data_synth = utils.get_batch_flow(path_synth, tuple(3*dim for dim in self.img_size), batch_size)
 
-            n_batches_real = len(data_real) if len(data_real) % batch_size == 0 else len(data_real) - 1
+
+            n_batches_real = len(data_real) if data_real[-1].shape[0]==batch_size else len(data_real) - 1
 
             data_real = list(islice(data_real, n_batches_real))
             data_synth = list(islice(data_synth, n_batches_real))
@@ -671,7 +680,7 @@ class PuppetGAN:
                     print(f'\tSaved evaluation rows and gifs for epoch {epoch}!')
                     
                     utils.plot_losses(losses)
-                    utils.save(a, b1, b2, b3, generated_images, i, epoch, remove_existing=False)
+                    utils.save(a, b1, b2, b3, generated_images, i, epoch, remove_existing=False, base_path=os.path.join(self._target_path, 'train'))
                     print(f'\tSaved losses and images for epoch {epoch}!')
 
             if save_model_every:
@@ -685,7 +694,7 @@ class PuppetGAN:
 
     def eval(self,
              base_path,
-             target_path='results/test',
+             target_path=None,
              target_folder=None,
              sample=6):
         '''
@@ -701,6 +710,9 @@ class PuppetGAN:
                                 if set to 'None' it will generate all of them
         '''
         print('\n\tCreating evaluation rows.')
+
+        if target_path is None:
+            target_path = os.path.join(self._target_path, 'test')
 
         if target_folder is not None:
             target_path = os.path.join(target_path, str(target_folder))
