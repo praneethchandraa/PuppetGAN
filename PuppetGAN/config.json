@@ -1,10 +1,10 @@
 {
 	"comments" : "Keep here any info you may want about the current configuration :)",
 
-	"dataset" : "mnist",
+	"dataset" : "mouth",
 	"dataset info" : "choose between 'mnist', 'usps', 'mouth' and 'light'",
 
-	"epochs" : 301,
+	"epochs" : 151,
 	"noise std" : 0.2,
 	"bottleneck noise" : 0,
 	
