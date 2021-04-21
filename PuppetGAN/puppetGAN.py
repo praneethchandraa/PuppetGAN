@@ -679,7 +679,7 @@ class PuppetGAN:
                         self.eval(base_path=path_eval, target_folder=epoch)
                     print(f'\tSaved evaluation rows and gifs for epoch {epoch}!')
                     
-                    utils.plot_losses(losses)
+                    utils.plot_losses(losses, save_path=self._target_path)
                     utils.save(a, b1, b2, b3, generated_images, i, epoch, remove_existing=False, base_path=os.path.join(self._target_path, 'train'))
                     print(f'\tSaved losses and images for epoch {epoch}!')
 
