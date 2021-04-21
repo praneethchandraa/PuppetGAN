@@ -8,24 +8,28 @@ import subprocess as sp
 
 def realPrep(pth):
     img = cv2.imread(pth)
-    board = 255*np.ones((256, 256, 3), dtype=np.uint8)
-    board[56:200, 38:218, :] = img
+    board = np.zeros((180, 180, 3), dtype=np.uint8)
+    board[18:162, :, :] = img
+
+    board = cv2.resize(board, (128, 128), interpolation = cv2.INTER_AREA)
     
     return board 
 
 def synthPrep(pth):
     img = cv2.imread(pth)
-    board = 255*np.ones((768, 768, 3), dtype=np.uint8)
-    board[:768, :256, :] = img
+    img = cv2.resize(img, (128, 384), interpolation = cv2.INTER_AREA)
+    board = 255*np.ones((384, 384, 3), dtype=np.uint8)
+    board[:, :128, :] = img
     return board
 
 def makeSynGrid(pths, out):
     for i in range(0, 10, 10):
         imgs = [cv2.imread(pths[k]) for k in range(i, i+10)]
-        grid = 255*np.ones((2560, 2560, 3), dtype=np.uint8)
+        imgs = [cv2.resize(i, (128, 384), interpolation = cv2.INTER_AREA) for i in imgs]
+        grid = 255*np.ones((1280, 1280, 3), dtype=np.uint8)
 
         for j in range(10):
-            grid[256*j:256*(j+1), 0:256, :] = imgs[j][256:512, 0:256, :]
+            grid[128*j:128*(j+1), 0:128, :] = imgs[j][128:256, 0:128, :]
             
         cv2.imwrite(out+f"image_{i}.png", grid)
 
