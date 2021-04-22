@@ -74,6 +74,7 @@ def main(test, ckpt):
     IMG_SIZE = tuple(hyperparams[dataset_mapping[DATASET]]['image size'])
     SAVE_IMG_EVERY = hyperparams[dataset_mapping[DATASET]]['save images every']
     SAVE_MODEL_EVERY = hyperparams[dataset_mapping[DATASET]]['save model every']
+    BOTTLENECK_DIM = hyperparams[dataset_mapping[DATASET]]['bottleneck_dim']
 
     # get the weights for the different losses
     # they are used only during training
@@ -100,8 +101,9 @@ def main(test, ckpt):
                                   real_disc_lr=REAL_DISC_LR,
                                   synth_gen_lr=SYNTH_GEN_LR,
                                   synth_disc_lr=SYNTH_DISC_LR,
+                                  bottleneck_dim = BOTTLENECK_DIM,
                                   target_path=TARGET_PATH,
-                                  name=NAME)
+                                  name=NAME,)
     
     if ckpt != -1:
         ckpt = f'ckpt-{ckpt}'
