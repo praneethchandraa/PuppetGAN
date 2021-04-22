@@ -4,10 +4,10 @@
 	"dataset" : "syn_weiz",
 	"dataset info" : "choose between 'mnist', 'usps', 'mouth', 'light', 'syn_weiz'",
 
-	"target_path" : "./results/syn_weiz", 
-	"name" : "syn_weiz",
+	"target_path" : "./results/syn_weiz_c", 
+	"name" : "syn_weiz_c",
 
-	"epochs" : 1,
+	"epochs" : 300,
 	"noise std" : 0.2,
 	"bottleneck noise" : 0,
 	
@@ -15,11 +15,11 @@
 	"is relativistic" : false,
 
 	"learning rates" : {
-		"real generator" : 2e-4,
-		"real discriminator" : 5e-5,
+		"real generator" : 1e-4,
+		"real discriminator" : 2.5e-5,
 
-		"synthetic generator" : 2e-4,
-		"synthetic discriminator" : 5e-5
+		"synthetic generator" : 1e-4,
+		"synthetic discriminator" : 2.5e-5
 	},
 
 	"losses weights" : {
@@ -42,7 +42,7 @@
 	"faces" : {
 		"info" : "dataset-specific hyperparameters",
 
-		"batch size" : 16,
+		"batch size" : 32,
 		"image size" : [128, 128],
 		"save images every" : 10,
 		"save model every" : 10
@@ -51,9 +51,9 @@
 	"syn_weiz": {
 		"info": "dataset-specific hyperparameters",
 
-		"batch size" : 4,
-		"image size" : [256, 256],
-		"save images every" : 10,
-		"save model every" : 10
+		"batch size" : 32,
+		"image size" : [128, 128],
+		"save images every" : 20,
+		"save model every" : 20
 	}
 }
