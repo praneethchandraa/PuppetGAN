@@ -49,6 +49,7 @@ class PuppetGAN:
                  real_disc_lr=5e-5,
                  synth_gen_lr=2e-4,
                  synth_disc_lr=5e-5,
+                 bottleneck_dim = 128,
                  target_path='./results',
                  name = 'PuppetGAN'):
         # the desired size of the images
@@ -77,7 +78,7 @@ class PuppetGAN:
         self.gan_loss = tf.keras.losses.MeanSquaredError()
 
         # create the shared encoder
-        self.encoder = m.get_encoder(self.bottleneck_noise)
+        self.encoder = m.get_encoder(self.bottleneck_noise, bottleneck_dim=bottleneck_dim)
         
         # create the decoders
         self.decoder_real = m.get_decoder(prefix='Real')
