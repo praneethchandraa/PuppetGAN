@@ -4,8 +4,8 @@
 	"dataset" : "syn_weiz",
 	"dataset info" : "choose between 'mnist', 'usps', 'mouth', 'light', 'syn_weiz'",
 
-	"target_path" : "./results/syn_weiz_c_512", 
-	"name" : "syn_weiz_c_512",
+	"target_path" : "./results/syn_weiz_c_512_sig_dlr", 
+	"name" : "syn_weiz_c_512_sig_dlr",
 	
 	"epochs" : 300,
 	"noise std" : 0.2,
@@ -15,11 +15,11 @@
 	"is relativistic" : false,
 
 	"learning rates" : {
-		"real generator" : 1e-4,
-		"real discriminator" : 2.5e-5,
+		"real generator" : 2e-4,
+		"real discriminator" : 5e-5,
 
-		"synthetic generator" : 1e-4,
-		"synthetic discriminator" : 2.5e-5
+		"synthetic generator" : 2e-4,
+		"synthetic discriminator" : 5e-5
 	},
 
 	"losses weights" : {

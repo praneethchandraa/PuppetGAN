@@ -240,7 +240,8 @@ def pix2pix_discriminator(name=None, img_size=(128, 128)):
     x = Conv2D(1,
                4,
                strides=1,
-               kernel_initializer=initializer)(x) # (bs, 14, 14, 1) or (bs, 2, 2, 1)
+               kernel_initializer=initializer,
+	       activation='sigmoid')(x) # (bs, 14, 14, 1) or (bs, 2, 2, 1)
 
     return Model(inputs=inputs, outputs=x, name=name)
 

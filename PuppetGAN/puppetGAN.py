@@ -261,7 +261,7 @@ class PuppetGAN:
         '''
             Creates a discriminator.
         '''
-        discriminator = m.pix2pix_discriminator_(name=name, img_size=self.img_size)
+        discriminator = m.pix2pix_discriminator(name=name, img_size=self.img_size)
         optimizer = tf.keras.optimizers.Adam(lr, beta_1=beta_1)
         gradients = None
 

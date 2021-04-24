@@ -6,15 +6,6 @@ import numpy as np
 import subprocess as sp
 
 
-def realPrep(pth):
-    img = cv2.imread(pth)
-    board = np.zeros((180, 180, 3), dtype=np.uint8)
-    board[18:162, :, :] = img
-
-    board = cv2.resize(board, (128, 128), interpolation = cv2.INTER_AREA)
-    
-    return board 
-
 def synthPrep(pth):
     img = cv2.imread(pth)
     img = cv2.resize(img, (128, 384), interpolation = cv2.INTER_AREA)
@@ -42,9 +33,9 @@ out = './data/syn_weiz/'
 
 sp.run(['mkdir', '-p', out+'real_/real'])
 
-for pth in pths_r[:-93]:
+for pth in pths_r[:-10]:
     file = out+'real_/real/'+pth.split('/')[-1]
-    img = realPrep(pth)
+    img = cv2.imread(pth)
     cv2.imwrite(file, img)
 
 sp.run(['mkdir', '-p', out+'synth_/synth'])
@@ -57,9 +48,9 @@ for pth in pths_syn[:-1000]:
 sp.run(['mkdir', '-p', out+'rows_'])
 sp.run(['mkdir', '-p', out+'rows_/real'])
 
-for pth in pths_r[-93:]:
+for pth in pths_r[-10:]:
     file = out+'rows_/real/'+pth.split('/')[-1]
-    img = realPrep(pth)
+    img = cv2.imread(pth)
     cv2.imwrite(file, img)
 
 
