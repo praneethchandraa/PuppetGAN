@@ -4,8 +4,8 @@
 	"dataset" : "syn_weiz",
 	"dataset info" : "choose between 'mnist', 'usps', 'mouth', 'light', 'syn_weiz'",
 
-	"target_path" : "./results/syn_weiz_c_512_sig_dlr", 
-	"name" : "syn_weiz_c_512_sig_dlr",
+	"target_path" : "./results/syn_weiz_test", 
+	"name" : "syn_weiz_c_test",
 	
 	"epochs" : 300,
 	"noise std" : 0.2,
@@ -54,8 +54,8 @@
 	"syn_weiz": {
 		"info": "dataset-specific hyperparameters",
 
-		"bottleneck_dim" : 512,
-		"batch size" : 32,
+		"bottleneck_dim" : 128,
+		"batch size" : 4,
 		"image size" : [128, 128],
 		"save images every" : 20,
 		"save model every" : 20

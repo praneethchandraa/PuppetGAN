@@ -143,9 +143,11 @@ def get_encoder(noise_std=0, bottleneck_dim=128):
     encoder = [
         downsample(64, 4, apply_norm=False, name='Downsampling_1'), # (bs, 64, 64, 64) or (bs, 16, 16, 64)
         downsample(128, 4, name='Downsampling_2'), # (bs, 32, 32, 128) or (bs, 8, 8, 128)
-        downsample(256, 4, name='Downsampling_3'), # (bs, 16, 16, 256) or (bs, 4, 4, 512)
+        downsample(256, 4, name='Downsampling_3'), # (bs, 16, 16, 256) or (bs, 4, 4, 256)
         downsample(512, 4, name='Downsampling_4'), # (bs, 8, 8, 512) or (bs, 2, 2, 512)
         downsample(512, 4, name='Downsampling_5'), # (bs, 4, 4, 512) or (bs, 1, 1, 512)
+        downsample(512, 4, name='Downsampling_6'), # (bs, 2, 2, 512) 
+        downsample(512, 4, name='Downsampling_7')  # (bs, 1, 1, 512) 
     ]
 
     bottleneck = get_bottleneck(dim=bottleneck_dim, noise_std=noise_std)
@@ -161,6 +163,8 @@ def get_decoder(prefix=None):
         prefix = f'{prefix}_'
 
     decoder = [
+        upsample(512, 4, name=f'{prefix}Upsampling_5'), # (bs, 2, 2, 512)
+        upsample(512, 4, name=f'{prefix}Upsampling_6'), # (bs, 4, 4, 512)
         upsample(512, 4, name=f'{prefix}Upsampling_1'), # (bs, 8, 8, 512) or (bs, 2, 2, 512)
         upsample(256, 4, name=f'{prefix}Upsampling_2'), # (bs, 16, 16, 256) or (bs, 4, 4, 512)
         upsample(128, 4, name=f'{prefix}Upsampling_3'), # (bs, 32, 32, 128) or (bs, 8, 8, 256)
@@ -240,8 +244,7 @@ def pix2pix_discriminator(name=None, img_size=(128, 128)):
     x = Conv2D(1,
                4,
                strides=1,
-               kernel_initializer=initializer,
-	       activation='sigmoid')(x) # (bs, 14, 14, 1) or (bs, 2, 2, 1)
+               kernel_initializer=initializer)(x) # (bs, 14, 14, 1) or (bs, 2, 2, 1)
 
     return Model(inputs=inputs, outputs=x, name=name)
 
@@ -257,7 +260,7 @@ def convolve(filters, size, name=None):
                       padding='same',
                       kernel_initializer=initializer,
                       use_bias=False))
-                      
+
     result.add(LeakyReLU())
 
     return result
@@ -276,13 +279,13 @@ def pix2pix_discriminator_(name=None, img_size=(128, 128)):
     x = inputs
 
     x = downsample(64, 4, False)(x) 
+    x = convolve(64, 4)(x)
+    x = downsample(128, 4)(x)
     x = convolve(128, 4)(x)
-    x = downsample(256, 4)(x)
-    x = convolve(512, 4)(x)
     
 
     x = ZeroPadding2D()(x) 
-    x = Conv2D(1024,
+    x = Conv2D(256,
                4,
                strides=1,
                kernel_initializer=initializer,
