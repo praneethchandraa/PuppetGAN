@@ -146,8 +146,8 @@ def get_encoder(noise_std=0, bottleneck_dim=128):
         downsample(256, 4, name='Downsampling_3'), # (bs, 16, 16, 256) or (bs, 4, 4, 256)
         downsample(512, 4, name='Downsampling_4'), # (bs, 8, 8, 512) or (bs, 2, 2, 512)
         downsample(512, 4, name='Downsampling_5'), # (bs, 4, 4, 512) or (bs, 1, 1, 512)
-        downsample(512, 4, name='Downsampling_6'), # (bs, 2, 2, 512) 
-        downsample(512, 4, name='Downsampling_7')  # (bs, 1, 1, 512) 
+        # downsample(512, 4, name='Downsampling_6'), # (bs, 2, 2, 512) 
+        # downsample(512, 4, name='Downsampling_7')  # (bs, 1, 1, 512) 
     ]
 
     bottleneck = get_bottleneck(dim=bottleneck_dim, noise_std=noise_std)
@@ -163,8 +163,8 @@ def get_decoder(prefix=None):
         prefix = f'{prefix}_'
 
     decoder = [
-        upsample(512, 4, name=f'{prefix}Upsampling_5'), # (bs, 2, 2, 512)
-        upsample(512, 4, name=f'{prefix}Upsampling_6'), # (bs, 4, 4, 512)
+        # upsample(512, 4, name=f'{prefix}Upsampling_5'), # (bs, 2, 2, 512)
+        # upsample(512, 4, name=f'{prefix}Upsampling_6'), # (bs, 4, 4, 512)
         upsample(512, 4, name=f'{prefix}Upsampling_1'), # (bs, 8, 8, 512) or (bs, 2, 2, 512)
         upsample(256, 4, name=f'{prefix}Upsampling_2'), # (bs, 16, 16, 256) or (bs, 4, 4, 512)
         upsample(128, 4, name=f'{prefix}Upsampling_3'), # (bs, 32, 32, 128) or (bs, 8, 8, 256)
