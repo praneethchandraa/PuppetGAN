@@ -7,7 +7,7 @@ from glob import glob
 
 mask_m = io.loadmat('./data/wezman/classification_masks.mat')['original_masks']
 paths = glob('./data/wezman/videos/*.avi')
-save_path = './data/syn-weiz/weizman/'
+save_path = './data/sample/weizman_c/'
 
 masks = list(mask_m[0][0])
 names = mask_m.dtype.names
@@ -18,13 +18,13 @@ def getCropped(frame, mask):
     x, y = np.nonzero(mask)
     x, y = np.mean(x).astype(int), np.mean(y).astype(int)
 
-    x = 64 if x<64 else x
-    x = 80 if x>80 else x
+    x = 43 if x<43 else x
+    x = 101 if x>101 else x
 
-    y = 64 if y<64 else y
-    y = 116 if y>116 else y
+    y = 43 if y<43 else y
+    y = 137 if y>137 else y
 
-    return frame[x-64:x+64, y-64:y+64, :]
+    return frame[x-43:x+43, y-43:y+43, :]
     
 
 def extractAndCrop(pth, skip=4):
@@ -42,6 +42,7 @@ def extractAndCrop(pth, skip=4):
         if count%skip==0 and success==1:
             try:
                 cropped = getCropped(frame, mask_map[file_name][:, :, count])
+                cropped = cv2.resize(cropped, (64, 64), interpolation=cv2.INTER_AREA)
                 cv2.imwrite(f'{save_path}{file_name}_{count}.png', cropped)
             except:
                 print("failed")
