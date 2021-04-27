@@ -1,7 +1,7 @@
 # Better Cross-Domain Feature Disentanglement and Manipulation with Improved PuppetGAN
 
 <p align="center">
-  <img src="https://github.com/GiorgosKarantonis/images/blob/master/PuppetGAN/mouth_roids_190_.gif" width="100%">
+  <img src="https://github.com/praneethchandraa/PuppetGAN/blob/585/6.gif" width="100%">
   <em>Quite cool... Right?</em>
 </p>
 
