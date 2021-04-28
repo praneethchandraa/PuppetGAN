@@ -39,7 +39,7 @@ We used a mask on the real images to get the person, we then and made a 128x128 
 
  
 ### Experiment 3: 
-Introduced a sigmoid activation for the activation function in the discriminator. 
+We increased the bottleneck dimension size of the generator to 512  to see the effects it has on the generated pose. The apparent generated pose has significantly improved although the generated images are blurry. 
 ![6](https://user-images.githubusercontent.com/50864401/116167490-f0950c00-a6c5-11eb-8701-3ca631c64e34.gif)
 
 
