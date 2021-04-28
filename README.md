@@ -50,6 +50,10 @@ We found no activation function is being used by default in the repository. We a
 
 ![6](https://user-images.githubusercontent.com/50864401/116167615-30f48a00-a6c6-11eb-826b-328beea8330f.gif)
 
+### Experiment 5:
+We tightened the crop around the people in the weizman dataset to (86, 86) and resized the resulting image to (64, 64). The poses in the generated images are far richer in information than the previous versions.
+
+![6 (1)](https://user-images.githubusercontent.com/50864401/116341712-02021500-a7a7-11eb-9db2-a1aa5d9fb4c3.gif)
 
 
 
