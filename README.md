@@ -19,7 +19,7 @@ Validation data:
 - 1000 synthetic images randomly sampled from the SynAction dataset
 - 10 real images sampled from the Weizman dataset frames
 
-In order to prepare your data for these experiments, download the SynAction and Weizmann datasets and store them in a folder. The data preparation script is syn_weiz_data.py. In this folder edit the lines 49,50 to the correct paths to the folder where your data is located. You may proceed to run the script to prepare your dataset. 
+In order to prepare your data for these experiments, download the SynAction and Weizmann datasets and store them in a folder. The data preparation script is syn_weiz_data.py. In this file edit the lines 49,50 to the correct paths to the folder where your data is located. You may proceed to run the script to prepare your dataset. 
 
 
 ## Experiments and Results
