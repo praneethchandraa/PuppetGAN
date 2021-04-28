@@ -25,7 +25,7 @@ We run a couple of experiments to get the PuppetGAN algorithm to correctly manip
 
 ### Experiment 0:
 In this experiment we trained the model on resized images (64x64) from the Weizmann real images without any masking. 
-In most of the generated images, the pose is doesn’t look related to the one in the corresponding synthetic image.
+In most of the generated images the pose is doesn’t look like it's related to the one in the corresponding synthetic image.
 ![6](https://user-images.githubusercontent.com/50864401/116167227-6c428900-a6c5-11eb-93eb-2ecabe2750b6.gif)
 
 ### Experiment 1: 
@@ -34,7 +34,7 @@ We used a mask on the real images to get the person, we then and made a 128x128 
 
 
 ### Experiment 2: 
- We increased the bottleneck dimension size of the generator to 256  to see the effects it has on the generated pose. It was an improvement over having the dimension size as 128
+ We increased the bottleneck dimension size of the generator to 256  to see the effects it has on the generated pose. It was an improvement over having the dimension size as 128.
  ![6](https://user-images.githubusercontent.com/50864401/116167418-c7747b80-a6c5-11eb-93f7-1b71a96febde.gif)
 
  
@@ -44,7 +44,7 @@ Introduced a sigmoid activation for the activation function in the discriminator
 
 
 ### Experiment 4: 
-We found no activation function is being used by default in the repository. We added sigmoid activation to the discriminator. The bottleneck dimension being used is 512. The generated poses are better than the ones generated when there is not activation function
+We found no activation function is being used by default in the repository. We added sigmoid activation to the discriminator. The bottleneck dimension being used is 512. The generated poses are better than the ones generated when there is no activation function.
 
 ![6](https://user-images.githubusercontent.com/50864401/116167615-30f48a00-a6c6-11eb-826b-328beea8330f.gif)
 
