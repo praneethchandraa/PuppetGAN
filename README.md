@@ -13,11 +13,12 @@ In addition to the MNIST dataset that the original repository used, we implement
 
 ## Data Preparation
 Training data:
-- 1200 real images obtained by sampling every fourth frame in the Weizman dataset videos
+- 1200 real images obtained by sampling every fourth frame in the Weizmann dataset videos
 - 1200 synthetic pose images from the SynAction dataset
 Validation data:
-- 100 images sampled from the SynAction dataset
-- *20* images sampled from the Weizman video frames
+- 100 synthetic images sampled from the SynAction dataset
+- 10 real images sampled from the Weizman dataset frames
+
 
 ## Experiments and Results
 We run a couple of experiments to get the PuppetGAN algorithm to correctly manipulate the poses from the SynAction images to the Weizmann images.
@@ -46,9 +47,6 @@ Introduced a sigmoid activation for the activation function in the discriminator
 We found no activation function is being used by default in the repository. We added sigmoid activation to the discriminator. The bottleneck dimension being used is 512. The generated poses are better than the ones generated when there is not activation function
 
 ![6](https://user-images.githubusercontent.com/50864401/116167615-30f48a00-a6c6-11eb-826b-328beea8330f.gif)
-
-
-### Experiment 5: 
 
 
 
