@@ -7,7 +7,7 @@ from glob import glob
 
 mask_m = io.loadmat('./data/wezman/classification_masks.mat')['original_masks']
 paths = glob('./data/wezman/videos/*.avi')
-save_path = './data/sample/weizman_c/'
+save_path = './data/syn-weiz/weizman_c/'
 
 masks = list(mask_m[0][0])
 names = mask_m.dtype.names
