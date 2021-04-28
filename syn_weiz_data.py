@@ -6,30 +6,52 @@ import numpy as np
 import subprocess as sp
 
 
+SIZE = 64 # Size of the real images
+
 def synthPrep(pth):
+    """
+        Prepares synthetic data for training
+
+        args:
+            pth: path to synthetic image
+    """
+
+
     img = cv2.imread(pth)
-    img = cv2.resize(img, (64, 192), interpolation = cv2.INTER_AREA)
-    board = 255*np.ones((192, 192, 3), dtype=np.uint8)
-    board[:, :64, :] = img
+    img = cv2.resize(img, (SIZE, SIZE*3), interpolation = cv2.INTER_AREA)
+    board = 255*np.ones((SIZE*3, SIZE*3, 3), dtype=np.uint8)
+    board[:, :SIZE, :] = img
     return board
 
 def makeSynGrid(pths, out):
+    """
+        Prepares synthetic data for evaluation in a GRID like in the paper
+
+        args:
+            pths: paths to the synthetic images
+            out: Folder to store the dataset
+    
+    """
+
+
     for i in range(0, 1000, 10):
         imgs = [cv2.imread(pths[k]) for k in range(i, i+10)]
-        imgs = [cv2.resize(i, (64, 192), interpolation = cv2.INTER_AREA) for i in imgs]
-        grid = 255*np.ones((640, 640, 3), dtype=np.uint8)
+        imgs = [cv2.resize(i, (SIZE, SIZE*3), interpolation = cv2.INTER_AREA) for i in imgs]
+        grid = 255*np.ones((SIZE*10, SIZE*10, 3), dtype=np.uint8)
 
         for j in range(10):
-            grid[64*j:64*(j+1), 0:64, :] = imgs[j][64:128, 0:64, :]
+            grid[SIZE*j:SIZE*(j+1), 0:SIZE, :] = imgs[j][SIZE:SIZE*2, 0:SIZE, :]
             
         cv2.imwrite(out+f"image_{i}.png", grid)
 
-pths_r = glob('./data/syn-weiz/weizman_c/*png')
-pths_syn = glob('./data/syn-weiz/synaction/*.png')
+
+
+pths_r = glob('./data/sample/weizman_c/*png') # Glob path to real images
+pths_syn = glob('./data/sample/synaction/*.png') # Glob path to synthetic images
 
 shuffle(pths_r), shuffle(pths_syn)
 
-out = './data/syn_weiz_6/'
+out = './data/syn_weiz_6/' # Output folder to store the dataset
 
 sp.run(['mkdir', '-p', out+'real_/real'])
 

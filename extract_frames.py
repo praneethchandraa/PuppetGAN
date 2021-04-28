@@ -5,9 +5,14 @@ import numpy as np
 from glob import glob
 
 
-mask_m = io.loadmat('./data/wezman/classification_masks.mat')['original_masks']
-paths = glob('./data/wezman/videos/*.avi')
-save_path = './data/syn-weiz/weizman_c/'
+mask_m = io.loadmat('./data/wezman/classification_masks.mat')['original_masks'] # Path to the masks for the weizmann dataset
+paths = glob('./data/wezman/videos/*.avi') # Glob path to the Weizmann videos
+save_path = './data/sample/weizman_c/' # Location to extract the frames
+
+CROP = 86 # Size of the CROP around the mask
+SIZE = 64 # Final size of the image
+
+hcrop = CROP//2
 
 masks = list(mask_m[0][0])
 names = mask_m.dtype.names
@@ -15,19 +20,40 @@ mask_map = dict(zip(names, masks))
 
 
 def getCropped(frame, mask):
+
+    '''
+        Takes a frame and the associated mask to crop out region around the mask
+
+        args:
+            frame : numpy array of the BGR image
+            mask : numpy array of the mask 
+
+
+    '''
+
+
     x, y = np.nonzero(mask)
     x, y = np.mean(x).astype(int), np.mean(y).astype(int)
 
-    x = 43 if x<43 else x
-    x = 101 if x>101 else x
+    x = hcrop if x<hcrop else x
+    x = 144-hcrop if x>144-hcrop else x
 
-    y = 43 if y<43 else y
-    y = 137 if y>137 else y
+    y = hcrop if y<hcrop else y
+    y = 180-hcrop if y>180-hcrop else y
 
-    return frame[x-43:x+43, y-43:y+43, :]
+    return frame[x-hcrop:x+hcrop, y-hcrop:y+hcrop, :]
     
 
 def extractAndCrop(pth, skip=4):
+    """
+        Samples a video for frames, crops them and saves them
+
+        args:
+            pth: Path to the video
+            skip: Number of frames to sample a single frame from
+
+    """
+
     file_name = video.split('/')[-1][:-4]
 
     vidcap = cv2.VideoCapture(pth)
@@ -42,7 +68,7 @@ def extractAndCrop(pth, skip=4):
         if count%skip==0 and success==1:
             try:
                 cropped = getCropped(frame, mask_map[file_name][:, :, count])
-                cropped = cv2.resize(cropped, (64, 64), interpolation=cv2.INTER_AREA)
+                cropped = cv2.resize(cropped, (SIZE, SIZE), interpolation=cv2.INTER_AREA)
                 cv2.imwrite(f'{save_path}{file_name}_{count}.png', cropped)
             except:
                 print("failed")
