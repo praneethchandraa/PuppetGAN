@@ -47,7 +47,8 @@ def main(test, ckpt):
         'usps' : 'digits',
         'mouth' : 'faces',
         'light' : 'faces',
-        'syn_weiz': 'syn_weiz'
+        'syn_weiz': 'syn_weiz',
+        'syn_weiz_6': 'syn_weiz_6'
     }
 
 
