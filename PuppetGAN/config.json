@@ -1,10 +1,10 @@
 {
 	"comments" : "Keep here any info you may want about the current configuration :)",
 
-	"dataset" : "syn_weiz",
+	"dataset" : "syn_weiz_6",
 	"dataset info" : "choose between 'mnist', 'usps', 'mouth', 'light', 'syn_weiz'",
 
-	"target_path" : "./results/syn_weiz_test", 
+	"target_path" : "./results/syn_weiz_te", 
 	"name" : "syn_weiz_c_test",
 	
 	"epochs" : 300,
@@ -51,12 +51,12 @@
 		"save model every" : 10
 	},
 
-	"syn_weiz": {
+	"syn_weiz_6": {
 		"info": "dataset-specific hyperparameters",
 
-		"bottleneck_dim" : 128,
+		"bottleneck_dim" : 256,
 		"batch size" : 4,
-		"image size" : [128, 128],
+		"image size" : [64, 64],
 		"save images every" : 20,
 		"save model every" : 20
 	}

@@ -8,7 +8,6 @@ import subprocess as sp
 
 
 def makeSynGrid(pths, out):
-    box = (0, 128, 128, 128)
     for i in range(0, 1000, 10):
         imgs = [cv2.imread(pths[k]) for k in range(i, i+10)]
         grid = 255*np.ones((1280, 1280, 3), dtype=np.uint8)
