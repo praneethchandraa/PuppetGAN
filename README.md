@@ -46,14 +46,13 @@ We increased the bottleneck dimension size of the generator to 512  to see the e
 
 
 ### Experiment 4: 
-We found no activation function is being used by default in the repository. We added sigmoid activation to the discriminator. The bottleneck dimension being used is 512. The generated poses are better than the ones generated when there is no activation function.
-
-![6](https://user-images.githubusercontent.com/50864401/116167615-30f48a00-a6c6-11eb-826b-328beea8330f.gif)
+We tightened the crop around the people in the weizman dataset to (86, 86) and resized the resulting image to (64, 64). The poses in the generated images are far richer in information than the previous versions.
+![6](./.github/images/n2.gif)
 
 ### Experiment 5:
-We tightened the crop around the people in the weizman dataset to (86, 86) and resized the resulting image to (64, 64). The poses in the generated images are far richer in information than the previous versions.
+We noticed that there no activation function is being employed at the end of the discriminator, which is essentially a classifier. We added sigmoid activation function to it and also changed the loss to cross entropy from MSE. The generated poses are sharper than when sigmoid is not used.
 
-![6 (1)](https://user-images.githubusercontent.com/50864401/116341712-02021500-a7a7-11eb-9db2-a1aa5d9fb4c3.gif)
+![6 (1)](./.github/images/n1.gif)
 
 
 
