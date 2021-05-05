@@ -245,59 +245,9 @@ def pix2pix_discriminator(name=None, img_size=(128, 128)):
                4,
                strides=1,
                kernel_initializer=initializer,
-	       activation='sigmoid')(x) # (bs, 14, 14, 1) or (bs, 2, 2, 1)
+	       activation=None)(x) # (bs, 14, 14, 1) or (bs, 2, 2, 1)
 
     return Model(inputs=inputs, outputs=x, name=name)
 
 
 
-def convolve(filters, size, name=None):
-    initializer = random_normal_initializer(0., .02)
-
-    result = Sequential(name=name)
-    result.add(Conv2D(filters,
-                      size,
-                      strides=1,
-                      padding='same',
-                      kernel_initializer=initializer,
-                      use_bias=False))
-
-    result.add(LeakyReLU())
-
-    return result
-
-
-def pix2pix_discriminator_(name=None, img_size=(128, 128)):
-    '''
-        PatchGan discriminator model (https://arxiv.org/abs/1611.07004).
-
-        Edited to increase patch resolution for higher image sizes
-    '''
-
-    initializer = random_normal_initializer(0., .02)
-
-    inputs = Input(shape=[img_size[0], img_size[1], 3])
-    x = inputs
-
-    x = downsample(64, 4, False)(x) 
-    x = convolve(64, 4)(x)
-    x = downsample(128, 4)(x)
-    x = convolve(128, 4)(x)
-    
-
-    x = ZeroPadding2D()(x) 
-    x = Conv2D(256,
-               4,
-               strides=1,
-               kernel_initializer=initializer,
-               use_bias=False)(x)
-
-    x = BatchNormalization()(x)
-    x = LeakyReLU()(x)
-
-    x = ZeroPadding2D()(x) 
-    x = Conv2D(1,
-               4,
-               strides=1,
-               kernel_initializer=initializer)(x) 
-    return Model(inputs=inputs, outputs=x, name=name)

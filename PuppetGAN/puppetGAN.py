@@ -101,7 +101,8 @@ class PuppetGAN:
                                                                                               lr=self.synth_disc_lr)
 
         self.ckpt, self.ckpt_manager = self.define_checkpoints(path=os.path.join('./checkpoints', name))
-
+          
+        self._ckpt_pth = os.path.join('./checkpoints', name)
         self._target_path = target_path
 
 
@@ -220,7 +221,7 @@ class PuppetGAN:
         return ckpt, ckpt_manager
 
 
-    def restore_checkpoint(self, path='./checkpoints/puppetGAN', ckpt=-1, partial=False):
+    def restore_checkpoint(self, ckpt=-1, partial=False):
         '''
             Restores a checkpoint of the model.
 
@@ -231,6 +232,7 @@ class PuppetGAN:
                 partial : whether or not to restore all the weights (False)
                           or just the ones needed for evaluation (True)
         '''
+        path = self._ckpt_pth
         if ckpt == -1:
             if self.ckpt_manager.latest_checkpoint:
                 if partial:
