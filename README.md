@@ -57,6 +57,17 @@ We noticed that there no activation function is being employed at the end of the
 
 
 ### Training a Model 
+To extract frames from the weizann video dataset, run:
+
+```bash
+python3 extract_frames.py
+```
+All the necessary paths are annoted in the scripts, simply change them to desired values to get the frames. To prepare the dataset for training, run :
+
+```bash
+python3 syn_weiz_data.py
+```
+
 To start a new training, simply run:
 
 ```bash
