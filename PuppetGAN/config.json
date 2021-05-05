@@ -2,7 +2,7 @@
 	"comments" : "Keep here any info you may want about the current configuration :)",
 
 	"dataset" : "syn_weiz_6",
-	"dataset info" : "choose between 'mnist', 'usps', 'mouth', 'light', 'syn_weiz'",
+	"dataset info" : "choose between 'mnist', 'usps', 'mouth', 'light', 'syn_weiz'"
 
 	"target_path" : "./results/syn_weiz_6_512_n2", 
 	"name" : "syn_weiz_6_512_n2",
@@ -53,6 +53,7 @@
 
 	"syn_weiz_6": {
 		"info": "dataset-specific hyperparameters",
+
 
 		"bottleneck_dim" : 512,
 		"batch size" : 64,

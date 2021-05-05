@@ -13,18 +13,21 @@ In addition to the MNIST dataset that the original repository used, we implement
 
 ## Data Preparation
 Training data:
-- 1200 real images obtained by sampling every fourth frame in the Weizman dataset videos
+- 1200 real images obtained by sampling every fourth frame in the Weizmann dataset videos
 - 1200 synthetic pose images from the SynAction dataset
 Validation data:
-- 100 images sampled from the SynAction dataset
-- *20* images sampled from the Weizman video frames
+- 1000 synthetic images randomly sampled from the SynAction dataset
+- 10 real images sampled from the Weizman dataset frames
+
+In order to prepare your data for these experiments, download the SynAction and Weizmann datasets and store them in a folder. The data preparation script is syn_weiz_data.py. In this file edit the lines 49,50 to the correct paths to the folder where your data is located. You may proceed to run the script to prepare your dataset. 
+
 
 ## Experiments and Results
 We run a couple of experiments to get the PuppetGAN algorithm to correctly manipulate the poses from the SynAction images to the Weizmann images.
 
 ### Experiment 0:
 In this experiment we trained the model on resized images (64x64) from the Weizmann real images without any masking. 
-In most of the generated images, the pose is doesn’t look related to the one in the corresponding synthetic image.
+In most of the generated images the pose is doesn’t look like it's related to the one in the corresponding synthetic image.
 ![6](https://user-images.githubusercontent.com/50864401/116167227-6c428900-a6c5-11eb-93eb-2ecabe2750b6.gif)
 
 ### Experiment 1: 
@@ -33,23 +36,24 @@ We used a mask on the real images to get the person, we then and made a 128x128 
 
 
 ### Experiment 2: 
- We increased the bottleneck dimension size of the generator to 256  to see the effects it has on the generated pose. It was an improvement over having the dimension size as 128
+ We increased the bottleneck dimension size of the generator to 256  to see the effects it has on the generated pose. It was an improvement over having the dimension size as 128.
  ![6](https://user-images.githubusercontent.com/50864401/116167418-c7747b80-a6c5-11eb-93f7-1b71a96febde.gif)
 
  
 ### Experiment 3: 
-Introduced a sigmoid activation for the activation function in the discriminator. 
+We increased the bottleneck dimension size of the generator to 512  to see the effects it has on the generated pose. The apparent generated pose has significantly improved although the generated images are blurry. 
 ![6](https://user-images.githubusercontent.com/50864401/116167490-f0950c00-a6c5-11eb-8701-3ca631c64e34.gif)
 
 
 ### Experiment 4: 
-We found no activation function is being used by default in the repository. We added sigmoid activation to the discriminator. The bottleneck dimension being used is 512. The generated poses are better than the ones generated when there is not activation function
+We found no activation function is being used by default in the repository. We added sigmoid activation to the discriminator. The bottleneck dimension being used is 512. The generated poses are better than the ones generated when there is no activation function.
 
 ![6](https://user-images.githubusercontent.com/50864401/116167615-30f48a00-a6c6-11eb-826b-328beea8330f.gif)
 
+### Experiment 5:
+We tightened the crop around the people in the weizman dataset to (86, 86) and resized the resulting image to (64, 64). The poses in the generated images are far richer in information than the previous versions.
 
-### Experiment 5: 
-
+![6 (1)](https://user-images.githubusercontent.com/50864401/116341712-02021500-a7a7-11eb-9db2-a1aa5d9fb4c3.gif)
 
 
 
